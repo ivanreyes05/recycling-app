@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Eco Recycling - Earn Points</title>
+  <style>
+    body {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #a0d899;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: 100vh;
+      flex-wrap: wrap;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #4f9ac5;
+      color: white;
+      padding: 20px;
+      flex-shrink: 0;
+    }
+
+    .sidebar h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #fff;
+      padding-bottom: 8px;
+    }
+
+    .profile-info {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .user-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #130808;
+      margin-bottom: 11px;
+      object-fit: cover;
+    }
+
+    .sidebar p {
+      font-weight: bold;
+      font-size: 17px;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: #ffffff;
+      background-color: #3a7ca5;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      margin: 10px 0;
+      font-size: 15px;
+      font-weight: bold;
+      text-align: center;
+      transition: background 0.3s ease;
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background-color: #b33737;
+      color: #c8e6c9;
+      text-decoration: underline;
+    }
+
+    .content {
+      flex: 1;
+      padding: 40px;
+      background-color: #f4fff3;
+      position: relative;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #070a07;
+      color: rgb(255, 255, 255);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    button:hover {
+      background-color: #2e7d32;
+    }
+
+    .scanner-btn {
+      background-color: #00796b;
+    }
+
+    .points-display {
+      margin-top: 30px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    #congrats-box {
+      display: none;
+      background-color: #c8facc;
+      padding: 15px;
+      margin-top: 15px;
+      border: 1px solid #4caf50;
+      border-radius: 8px;
+    }
+
+    #points-added {
+      color: green;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    #points-remaining {
+      margin-top: 5px;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+      color: #0c0a0a;
+      background-color: #acecac;
+      margin-top: auto;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        text-align: center;
+      }
+
+      .sidebar nav a {
+        display: inline-block;
+        margin: 10px;
+      }
+
+      .content {
+        padding: 20px;
+      }
+    }
+    .rewards-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  padding: 20px;
+  justify-items: center;
+}
+
+.reward-card {
+  background-color: #4b6a79;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out;
+  width: 200%;
+  max-width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reward-card:hover {
+  transform: scale(1.05);
+}
+
+.reward-card img {
+  width: 200%;
+  max-width: 120px;
+  height: auto;
+  object-fit: contain;
+}
+.promo-heading {
+  text-align: center;
+  font-size: 23px;
+  margin-top: 29px;
+  color: #070c07; /* Optional: green tone to match eco theme */
+  font-weight: bold;
+}
+
+
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="profile-info">
+      <img src="person_12118592.png" alt="User Avatar" class="user-avatar" />
+      <p id="sidebar-name">Welcome!</p>
+      <p><strong><span id="sidebar-points">0</span> pts</strong></p>
+    </div>
+    <nav>
+      <a href="home.html">Dashboard</a>
+      <a href="rewards.html">Claim Rewards</a>
+      <a href="Earn points.html" class="active">Earn Points</a>
+      <a href="#" onclick="logout()">Log Out</a>
+    </nav>
+  </aside>
+
+  <div class="content">
+    <h1>Recycle and Earn Points</h1>
+    <div id="congrats-box">
+      🎉 Great job, <span id="sidebar-name-inline"></span>! You’ve reached your goal. Keep recycling!
+    </div>
+    <div id="points-added"></div>
+    <div id="points-remaining"></div>
+
+    <div class="form-group">
+      <label for="bottle-count">Enter number of bottles:</label>
+      <input type="number" id="bottle-count" placeholder="e.g. 3" />
+    </div>
+    <button onclick="addBottlePoints()">Add Bottle Points</button>
+
+    <div class="form-group">
+      <label for="cans-count">Enter number of Cans:</label>
+      <input type="number" id="cans-count" placeholder="e.g. 2" />
+    </div>
+    <button onclick="addBagPoints()">Add Can Points</button>
+
+    <button class="scanner-btn" onclick="simulateScan()">📷 Simulate Scan</button>
+
+    <div class="points-display">
+      <strong>Total Points: <span id="total-points">0</span></strong>
+    </div>
+
+    <h4 class="promo-heading">THE PROMO PRODUCT</h4>
+
+    <section class="rewards-board">
+      <div class="reward-card">
+        <img src="thermos_9401359.png" alt="Water Bottle" />
+      </div>
+      <div class="reward-card">
+        <img src="eco-bag_1086954.png" alt="Tote Bag" />
+      </div>
+      <div class="reward-card">
+        <img src="diary-book_13323633.png" alt="Mug" />
+      </div>
+      <!-- Add more reward-card divs here -->
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Eco Recycling. All rights reserved.</p>
+    </footer>
+  </main>
+      
+  <script>
+    const name = localStorage.getItem('ecoName') || "Guest User";
+    let totalPoints = parseInt(localStorage.getItem('ecoPoints')) || 0;
+    const pointsTarget = 100;
+
+    document.getElementById("sidebar-name").textContent = `Welcome, ${name}!`;
+    document.getElementById("sidebar-points").textContent = totalPoints;
+    document.getElementById("sidebar-name-inline").textContent = name;
+
+    function updateDisplay(added = 0) {
+      document.getElementById('total-points').textContent = totalPoints;
+      document.getElementById("sidebar-points").textContent = totalPoints;
+      localStorage.setItem('ecoPoints', totalPoints);
+
+      const remaining = Math.max(pointsTarget - totalPoints, 0);
+      document.getElementById("points-remaining").textContent = `Points to reach goal: ${remaining}`;
+
+      if (added > 0) {
+        const addedEl = document.getElementById("points-added");
+        addedEl.textContent = `+${added} points added!`;
+        setTimeout(() => {
+          addedEl.textContent = "";
+        }, 3000);
+      }
+
+      if (totalPoints >= pointsTarget) {
+        showCongrats();
+      }
+    }
+
+    function addBottlePoints() {
+      const input = document.getElementById('bottle-count');
+      const count = parseInt(input.value);
+      if (!isNaN(count) && count > 0) {
+        const addedPoints = count + 0;
+        totalPoints += addedPoints;
+        updateDisplay(addedPoints);
+        input.value = "";
+      }
+    }
+
+    function addBagPoints() {
+      const input = document.getElementById('cans-count');
+      const count = parseInt(input.value);
+      if (!isNaN(count) && count > 0) {
+        const addedPoints = count + 0;
+        totalPoints += addedPoints;
+        updateDisplay(addedPoints);
+        input.value = "";
+      }
+    }
+
+    function simulateScan() {
+      const scannedPoints = 0;
+      totalPoints += scannedPoints;
+      alert(`Scan successful! +${scannedPoints} points added.`);
+      updateDisplay(scannedPoints);
+    }
+
+    function logout() {
+      localStorage.removeItem('ecoName');
+      localStorage.removeItem('ecoPoints');
+      window.location.href = "index.html";
+    }
+
+    function showCongrats() {
+      const congratsBox = document.getElementById("congrats-box");
+      if (congratsBox.style.display !== "block") {
+        alert("🎉 Congratulations! You've reached your recycling goal!");
+        congratsBox.style.display = "block";
+      }
+    }
+
+    updateDisplay();
+  </script>
+</body>
+</html>

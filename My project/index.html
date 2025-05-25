@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recycling App - Login</title>
+  
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e6f9ec, #c6eac4);
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .auth-container {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    section {
+      background-color: #ffffffee;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .logo-container {
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      width: 80px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #2e7d32;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: 500;
+      color: #333;
+      text-align: left;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #256428;
+    }
+
+    .signup-link {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .signup-link a {
+      color: #2e717d;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+
+    .forgot-password {
+      text-align: right;
+      margin-top: 5px;
+      font-size: 13px;
+    }
+
+    .forgot-password a {
+      color: #2e717d;
+      text-decoration: none;
+    }
+
+    .forgot-password a:hover {
+      text-decoration: underline;
+    }
+
+    .success-container {
+      background-color: #ffffffee;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      margin: 40px auto;
+      text-align: center;
+    }
+
+
+    .hidden {
+      display: none;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #acecac;
+      font-size: 14px;
+      color: #080606;
+    }
+
+    @media (max-width: 500px) {
+      section {
+        padding: 20px;
+      }
+
+      .logo {
+        width: 90px;
+      }
+
+      input, button {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="auth-container">
+    <div class="logo-container">
+      <img src="recycle_15471523.png" alt="Eco Recycling Logo" class="logo" />
+    </div>
+
+    <section id="sign-in-form">
+      <h2>Sign In</h2>
+      <form id="login-form">
+        <label for="signin-email">Email Address</label>
+        <input type="email" id="signin-email" placeholder="Email Address" required />
+        
+        <label for="signin-password">Password</label>
+        <input type="password" id="signin-password" placeholder="Password" required />
+        
+        <div class="forgot-password">
+          <a href="#">Forgot Password?</a>
+        </div>
+
+        <button type="submit">Sign In</button>
+      </form>
+      <p class="signup-link">Don't have an account? <a href="#" onclick="toggleForms()">Register</a></p>
+    </section>
+
+    <!-- Registration Form -->
+    <section id="sign-up-form" class="hidden">
+      <h2>Register Your Account</h2>
+      <form id="register-form">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Full Name" required />
+        <label for="signup-email">Email Address</label>
+        <input type="email" id="signup-email" placeholder="Email Address" required />
+        <label for="signup-password">Create Password</label>
+        <input type="password" id="signup-password" placeholder="Create Password" required />
+        <button type="submit">Register</button>
+      </form>
+      <p class="signup-link">Already have an account? <a href="#" onclick="toggleForms()">Sign In</a></p>
+    </section>
+  </main>
+
+  <main id="success-section" class="success-container hidden" style="text-align: center; padding: 40px;">
+    <!-- Recycling Icon and Quote -->
+    <div style="margin-bottom: 20px;">
+      <img src="recycle_15471523.png" alt="Recycling Icon" style="width: 80px; height: 80px;" />
+      <p style="font-style: italic; color: #0a0e0a;">"Recycling turns things into other things. Which is like magic!"</p>
+    </div>
+  
+    <!-- Success Message -->
+    <h2>Welcome, <span id="success-user">User</span>!</h2>
+    <p>You have successfully logged in.</p>
+  
+    <!-- Button to Dashboard -->
+    <button onclick="goToDashboard()" style="padding: 10px 20px; background-color: #4caf50; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+      Go to Dashboard
+    </button>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Eco Recycling. All rights reserved.</p>
+  </footer>
+</style>
+
+</style>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyA0i-SqMlCdINxqzj5cWfxhsGDFFCTtYZo",
+      authDomain: "my-project-3f216.firebaseapp.com",
+      projectId: "my-project-3f216",
+      storageBucket: "my-project-3f216.appspot.com",
+      messagingSenderId: "904375299365",
+      appId: "1:904375299365:web:079654849a7444a7487ecc",
+      measurementId: "G-2ZZX44L686"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Toggle between login and register
+    function toggleForms() {
+      document.getElementById("login-form").classList.toggle("hidden");
+      document.getElementById("register-form").classList.toggle("hidden");
+    }
+
+    // Register new user
+    function register() {
+      const email = document.getElementById("register-email").value;
+      const password = document.getElementById("register-password").value;
+      const name = document.getElementById("register-name").value;
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(userCredential => {
+          const user = userCredential.user;
+          localStorage.setItem("ecoName", name);
+          localStorage.setItem("ecoPoints", 0);
+          showSuccess(name);
+        })
+        .catch(error => alert(error.message));
+    }
+    // Login user
+    function login() {
+      const email = document.getElementById("login-email").value;
+      const password = document.getElementById("login-password").value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then(userCredential => {
+          const user = userCredential.user;
+          const name = localStorage.getItem("ecoName") || "Eco User";
+          showSuccess(name);
+        })
+        .catch(error => alert(error.message));
+    }
+
+    function showSuccess(name) {
+      document.querySelector(".auth-container").classList.add("hidden");
+      document.getElementById("success-user").textContent = name;
+      document.getElementById("success-section").classList.remove("hidden");
+    }
+
+    function goToDashboard() {
+      window.location.href = "home.html";
+    }
+    
+    window.addEventListener("DOMContentLoaded", function () {
+      function toggleForms() {
+        document.getElementById('sign-in-form').classList.toggle('hidden');
+        document.getElementById('sign-up-form').classList.toggle('hidden');
+      }
+
+      function saveUser(user) {
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        users.push(user);
+        localStorage.setItem('users', JSON.stringify(users));
+      }
+
+      function findUser(email, password) {
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        return users.find(user => user.email === email && user.password === password);
+      }
+
+      document.getElementById("login-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const email = document.getElementById("signin-email").value;
+        const password = document.getElementById("signin-password").value;
+
+        const user = findUser(email, password);
+
+        if (user) {
+          showSuccess(user.name, user.points);
+        } else {
+          alert("Invalid email or password.");
+        }
+      });
+
+      document.getElementById("register-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("signup-email").value;
+        const password = document.getElementById("signup-password").value;
+
+        const newUser = { name, email, password, points: 0 };
+        saveUser(newUser);
+        showSuccess(newUser.name, newUser.points);
+      });
+
+      function showSuccess(name, points) {
+        localStorage.setItem('ecoName', name);
+        localStorage.setItem('ecoPoints', points);
+        document.querySelector(".auth-container").classList.add("hidden");
+        document.getElementById("success-user").textContent = name;
+        document.getElementById("success-section").classList.remove("hidden");
+      }
+
+      window.goToDashboard = function () {
+        window.location.href = "home.html";
+      }
+
+      window.toggleForms = toggleForms;
+    });
+  </script>
+</body>
+</html>

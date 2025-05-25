@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Eco Recycling - Home</title>
+  <style>
+    body {
+      box-sizing:content-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #a0d899;
+      display: flex;
+      flex-direction: row;
+      min-height: 100vh;
+      flex-wrap: wrap;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #4f9ac5;
+      color: white;
+      padding: 20px;
+      flex-shrink: 0;
+    }
+
+    .profile-info {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .user-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #130808;
+      margin-bottom: 11px;
+      object-fit: cover;
+    }
+
+    .sidebar p {
+      font-weight: bold;
+      font-size: 17px;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: #1b0f0f;
+      text-decoration: none;
+      margin: 15px 0;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .sidebar nav a:hover {
+      text-decoration: underline;
+      color: #000;
+    }
+    .sidebar nav a {
+  display: block;
+  color: #ffffff;
+  background-color: #3a7ca5;
+  padding: 10px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  margin: 10px 0;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background-color: #b33737;
+  color: #c8e6c9;
+  text-decoration: underline;
+}
+
+    .home-container {
+      flex-grow: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      margin-left: 220px;
+      max-width: calc(100% - 220px);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      color: #021602;
+    }
+
+    .card {
+      background-color: #ebf3f3;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 4px 12px rgba(29, 24, 24, 0.1);
+      margin-bottom: 10px;
+    
+    }
+
+    .points-summary {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .points-summary img {
+      width: 45px;
+    }
+
+    .top-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .top-card img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid #0077cc;
+      object-fit: cover;
+    }
+
+    .top-card strong {
+      font-size: 16px;
+      color: #333;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+      color: #0e1810;
+      background-color: #acecac;
+      margin-top: auto;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .home-container {
+        margin-left: 0;
+        max-width: 100%;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .sidebar nav {
+        text-align: center;
+      }
+
+      .sidebar nav a {
+        display: inline-block;
+        margin: 10px;
+      }
+
+      .points-summary {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="profile-info">
+      <img src="person_12118592.png" alt="User Avatar" class="user-avatar" />
+      <p id="sidebar-name">Welcome!</p>
+      <p><strong><span id="sidebar-points">0</span> pts</strong></p>
+    </div>
+    <nav>
+      <a href="home.html">Dashboard</a>
+      <a href="rewards.html" >Claim Rewards</a>
+      <a href="Earn points.html">Earn Points</a>
+      <a href="#" onclick="logout()">Log Out</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="home-container">
+    <div class="header">
+      <h1>Welcome Back!</h1>
+      <p class="motivation">Keep making a difference every bottle counts!</p>
+    </div>
+
+    <!-- EcoPoints Summary -->
+    <section class="card">
+      <h2>🌱 Points Summary</h2>
+      <div class="points-summary">
+        <img src="https://cdn-icons-png.flaticon.com/512/2278/2278992.png" alt="Points Icon" />
+        <div>
+          <strong>You have <span id="user-points">0</span> EcoPoints</strong><br />
+          Earn more by recycling regularly!
+        </div>
+      </div>
+    </section>
+
+    <!-- Rewards Info -->
+    <section class="card">
+      <h2>🎁 Rewards Info</h2>
+      <h4>Every Recycling Counts to Earn your Rewards</h4>
+      <ul>
+        <li>+6 Points per Tumbler</li>
+        <li>+4 Points per Eco-Friendly Bag</li>
+        <li>+10 Eco Notebook</li>
+        <li>🏆 Monthly Top Recycler = Certificate & Prize</li>
+      </ul>
+    </section>
+
+    <!-- Top Recycler -->
+    <section class="card top-recycler">
+      <h2>🌟 Top Recycler of the Month</h2>
+      <div class="top-card">
+        <img src="person_12118592.png" alt="Top Recycler" />
+        <div>
+          <strong>Ronald Wong</strong><br />
+          <small>Certified Recycler of the Month</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- Additional Feature -->
+    <section class="card">
+      <h2>♻️ How to Earn More</h2>
+      <p>Keep bringing recyclable materials like bottles, Cans, The more you bring, the more points you earn. Check in daily to not miss updates or bonuses!</p>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Eco Recycling. All rights reserved.</p>
+    </footer>
+  </main>
+
+  <!-- Script -->
+  <script>
+    const name = localStorage.getItem('ecoName');
+    const points = localStorage.getItem('ecoPoints');
+
+    document.getElementById("sidebar-name").textContent = name ? `Welcome, ${name}!` : "Guest User";
+    document.getElementById("user-points").textContent = points || "0";
+    document.getElementById("sidebar-points").textContent = points || "0";
+
+    function logout() {
+      localStorage.removeItem('ecoName');
+      localStorage.removeItem('ecoPoints');
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
